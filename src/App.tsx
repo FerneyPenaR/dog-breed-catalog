@@ -17,7 +17,7 @@ function App() {
     }
     return breedList.filter((breed) => {
       const breedName = breed.toLowerCase();
-      return breedName.includes(query);
+      return breedName.includes(query.toLowerCase());
     });
   };
 
@@ -62,7 +62,7 @@ function App() {
             <BreedList favorites={favorites}/>
           </Route>
           <Route path={'/'}>
-            <HomeList dogs={filteredBreedList} />
+            <HomeList breedList={filteredBreedList} />
           </Route>
         </Switch>
       </div>

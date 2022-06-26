@@ -5,9 +5,10 @@ interface Props {
   breed: string;
   setFavorite: Function;
   image: string;
+  refreshList: boolean;
 }
 
-const HeartFavorite = ({ image, breed, setFavorite, favorite = false }: Props) => {
+const HeartFavorite = ({ image, breed, setFavorite, favorite = false, refreshList = false }: Props) => {
   const saveService = new SaveService();
 
   const handleClick = (fav: boolean) => {
@@ -16,6 +17,9 @@ const HeartFavorite = ({ image, breed, setFavorite, favorite = false }: Props) =
       saveService.saveFavorite(image, breed);
     } else {
       saveService.removeFavorite(image);
+      if (refreshList) {
+        window.location.reload();
+      }
     }
   }
   return (

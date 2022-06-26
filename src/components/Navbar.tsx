@@ -7,7 +7,7 @@ import {
   Form,
   Button,
 } from 'react-bootstrap';
-import React from 'react';
+import React, { useState } from 'react';
 import Filter from './Filter';
 
 interface Props {
@@ -16,13 +16,15 @@ interface Props {
 }
 const NavbarComponent = ({ searchQuery, setSearchQuery }: Props) => {
   const history = useHistory();
+  const [expanded, setExpanded] = useState(false);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     history.push({
-        pathname: '/',
-        search: `?search=${searchQuery}`
+      pathname: '/',
+      search: `?search=${searchQuery}`,
     });
+    setExpanded(false);
   };
   return (
     <>
@@ -33,12 +35,15 @@ const NavbarComponent = ({ searchQuery, setSearchQuery }: Props) => {
         variant='dark'
         expand={'lg'}
         className='mb-3'
+        expanded={expanded}
+
       >
         <Container fluid>
           <Navbar.Brand href='/'>Breed Catalog</Navbar.Brand>
           <Navbar.Toggle
             aria-controls='navbarScroll'
             data-bs-target='#navbarScroll'
+            onClick={e => setExpanded(true)}
           ></Navbar.Toggle>
 
           <Navbar.Offcanvas
@@ -57,8 +62,17 @@ const NavbarComponent = ({ searchQuery, setSearchQuery }: Props) => {
                 <Nav.Link href='/favorites'>Favorites</Nav.Link>
               </Nav>
               <Form className='d-flex' onSubmit={onSubmit}>
-                <Filter placeholder='Search' searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
-                <Button variant='outline-success' type='submit'>
+                <Filter
+                  placeholder='Search'
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
+                />
+                <Button
+                  variant='outline-success'
+                  data-bs-toggle='collapse'
+                  data-bs-target='#navbarScroll'
+                  type='submit'
+                >
                   Search
                 </Button>
               </Form>

@@ -11,6 +11,7 @@ interface Props {
   showText?: boolean;
   showFav?: boolean;
   favorite?: boolean;
+  refreshList?: boolean;
 }
 
 const BreedCard = ({
@@ -18,7 +19,8 @@ const BreedCard = ({
   image,
   showText = true,
   showFav = false,
-  favorite = false
+  favorite = false,
+  refreshList = false
 }: Props) => {
   const [breedimage, setBreedImage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -83,6 +85,7 @@ const BreedCard = ({
             image={image}
             favorite={addFavorite}
             setFavorite={setAddFavorite}
+            refreshList={refreshList}
           />
         </div>
       )}

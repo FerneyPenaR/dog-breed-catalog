@@ -14,7 +14,7 @@ const Favorites = ({ favorites }: Props) => {
     }
     return favorites.filter((fav) => {
       const favName = fav.breed.toLowerCase();
-      return favName.includes(query);
+      return favName.includes(query.toLowerCase());
     });
   };
 
@@ -38,6 +38,7 @@ const Favorites = ({ favorites }: Props) => {
                   showText={true}
                   showFav={true}
                   favorite={true}
+                  refreshList={true}
                 ></BreedCard>
               </div>
             );
