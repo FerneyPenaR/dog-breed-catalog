@@ -50,8 +50,12 @@ const NavbarComponent = ({ searchQuery, setSearchQuery }: Props) => {
             id={`offcanvasNavbar-expand-sm`}
             aria-labelledby={`offcanvasNavbarLabel-expand-sm`}
             placement='end'
+            onHide={() => setExpanded(false)}
           >
-            <Offcanvas.Header closeButton>
+            <Offcanvas.Header 
+              closeButton
+              data-bs-toggle='collapse'
+              data-bs-target='#navbarScroll'>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-sm`}>
                 Menu
               </Offcanvas.Title>
